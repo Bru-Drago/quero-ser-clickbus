@@ -36,6 +36,7 @@
 		1599F2372530E05D0074241E /* GenreListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599F2362530E05D0074241E /* GenreListResponse.swift */; };
 		35DF46FB8A9D59DD5A1941DE /* Pods_MoviesDBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9AF2CDBDDC097E265CA65C /* Pods_MoviesDBUITests.framework */; };
 		DB80A9F63D1D9E952F14FD0B /* Pods_MoviesDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE9044ADA81BD19DBB307D1C /* Pods_MoviesDB.framework */; };
+		F51ABAF8254DFFE40002D606 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51ABAF7254DFFE30002D606 /* DetailViewController.swift */; };
 		F6CAA144B6365A36721D544B /* Pods_MoviesDBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92A9B1D08D39BE7697EDA2F /* Pods_MoviesDBTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +102,7 @@
 		E1B01C88FE98CC7AE9983952 /* Pods-MoviesDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesDB.release.xcconfig"; path = "Target Support Files/Pods-MoviesDB/Pods-MoviesDB.release.xcconfig"; sourceTree = "<group>"; };
 		F032477E884009F2D9890876 /* Pods-MoviesDB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesDB.debug.xcconfig"; path = "Target Support Files/Pods-MoviesDB/Pods-MoviesDB.debug.xcconfig"; sourceTree = "<group>"; };
 		F35EEB17D34EA98ACE375F34 /* Pods-MoviesDBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesDBTests.debug.xcconfig"; path = "Target Support Files/Pods-MoviesDBTests/Pods-MoviesDBTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F51ABAF7254DFFE30002D606 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				1599F1582530CC790074241E /* ViewController.swift */,
+				F51ABAF7254DFFE30002D606 /* DetailViewController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 			files = (
 				1599F1D72530D2EC0074241E /* Section.swift in Sources */,
 				1599F1C12530D1180074241E /* DefaultDecoder.swift in Sources */,
+				F51ABAF8254DFFE40002D606 /* DetailViewController.swift in Sources */,
 				1599F1EE2530D4D20074241E /* Movie.swift in Sources */,
 				1599F1F82530D52A0074241E /* Date+Extensions.swift in Sources */,
 				1599F1B92530D0AB0074241E /* Network.swift in Sources */,

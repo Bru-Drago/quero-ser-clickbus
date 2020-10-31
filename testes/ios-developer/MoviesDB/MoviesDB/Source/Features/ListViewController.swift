@@ -7,14 +7,31 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ListViewController: UIViewController {
+    
+    @IBOutlet weak var tableView : UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         // EXEMPLO DE COMO OBTER A LISTA DE FILMES POPULARES
+        listaFilmes()
+       
         
+        
+        // EXEMPLO DE COMO OBTER OS DETALHES DE UM FILME
+        
+
+        
+        
+        // EXEMPLO DE COMO OBTER A LISTA GÊNEROS
+        
+
+    }
+    
+    func listaFilmes(){
         MovieListWorker().fetchMovieList(
             section: .popular, page: 1,
             sucess: { response in
@@ -24,10 +41,8 @@ class ViewController: UIViewController {
             failure: { error in
                 print(error!)
             })
-        
-        
-        // EXEMPLO DE COMO OBTER OS DETALHES DE UM FILME
-        
+    }
+    func detalheFilmes(){
         MovieDetailsWorker().fetchMovieDetails(
             of: 497582, // COLOQUE O ID DO FILME AQUI
             sucess: { details in
@@ -37,10 +52,8 @@ class ViewController: UIViewController {
             failure: { error in
                 print(error!)
             })
-        
-        
-        // EXEMPLO DE COMO OBTER A LISTA GÊNEROS
-        
+    }
+    func listaGeneros(){
         GenreListWorker().fetchGenreList(
             sucess: { response in
                 guard let genres = response?.genres else { return }

@@ -115,6 +115,7 @@
                                             <outlet property="averageLbl" destination="0WH-41-iib" id="2dd-5B-MTG"/>
                                             <outlet property="countVotesLbl" destination="4dE-dx-BPp" id="cu3-xY-nQT"/>
                                             <outlet property="movieImg" destination="Hfh-id-R7v" id="JGU-jY-Sh7"/>
+                                            <outlet property="titleLbl" destination="DSJ-w1-diE" id="QfP-Jh-88h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

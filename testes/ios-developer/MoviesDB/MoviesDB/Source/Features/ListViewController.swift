@@ -11,37 +11,36 @@ class ListViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
     
+    var movie : [Movie] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        // EXEMPLO DE COMO OBTER A LISTA DE FILMES POPULARES
         listaFilmes()
-       
-        
-        
-        // EXEMPLO DE COMO OBTER OS DETALHES DE UM FILME
-        
-
-        
-        
-        // EXEMPLO DE COMO OBTER A LISTA GÊNEROS
-        
 
     }
-    
+    // EXEMPLO DE COMO OBTER A LISTA DE FILMES POPULARES
     func listaFilmes(){
         MovieListWorker().fetchMovieList(
             section: .popular, page: 1,
             sucess: { response in
                 guard let movies = response?.results else { return }
-                print(movies)
+                self.movie = movies
+                print("++++++********++++++")
+                print(self.movie)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             },
             failure: { error in
                 print(error!)
             })
     }
+    // EXEMPLO DE COMO OBTER OS DETALHES DE UM FILME
     func detalheFilmes(){
         MovieDetailsWorker().fetchMovieDetails(
             of: 497582, // COLOQUE O ID DO FILME AQUI
@@ -53,6 +52,7 @@ class ListViewController: UIViewController {
                 print(error!)
             })
     }
+    // EXEMPLO DE COMO OBTER A LISTA GÊNEROS
     func listaGeneros(){
         GenreListWorker().fetchGenreList(
             sucess: { response in
@@ -65,3 +65,29 @@ class ListViewController: UIViewController {
     }
 }
 
+extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(movie.count)
+        return movie.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)as! MovieCell
+
+        cell.titleLbl.text = movie[indexPath.row].title
+        let avg = movie[indexPath.row].voteAverage
+        let vote = movie[indexPath.row].voteCount
+        cell.averageLbl.text = String(avg)
+        cell.countVotesLbl.text = String(vote)
+        cell.movieImg.image = movie[indexPath.row].posterPath
+        
+        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+    
+    
+}

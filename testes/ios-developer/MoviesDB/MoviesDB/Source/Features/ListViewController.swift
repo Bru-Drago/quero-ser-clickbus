@@ -14,6 +14,8 @@ class ListViewController: UIViewController {
     @IBOutlet weak var tableView : UITableView!
     
     var movie : [Movie] = []
+    var page = 1
+    var hasMoreMovies = true
     
     
     override func viewDidLoad() {
@@ -22,18 +24,18 @@ class ListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        listaFilmes()
+        getMovieList(page: page)
 
     }
     // EXEMPLO DE COMO OBTER A LISTA DE FILMES POPULARES
-    func listaFilmes(){
+    func getMovieList(page:Int){
         MovieListWorker().fetchMovieList(
-            section: .popular, page: 1,
+            section: .popular, page: page,
             sucess: { response in
                 guard let movies = response?.results else { return }
-                self.movie = movies
-                print("++++++********++++++")
-                print(self.movie)
+                //self.movie = movies
+                self.movie.append(contentsOf: movies)
+                if self.movie.count < 20 {self.hasMoreMovies = false}
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -69,7 +71,6 @@ class ListViewController: UIViewController {
 
 extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(movie.count)
         return movie.count
         
     }
@@ -77,20 +78,24 @@ extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)as! MovieCell
-
-        cell.titleLbl.text = movie[indexPath.row].title
-        let avg = movie[indexPath.row].voteAverage
-        let vote = movie[indexPath.row].voteCount
-        cell.averageLbl.text = String(avg)
-        cell.countVotesLbl.text = String(vote)
-        let posterPath = (movie[indexPath.row].posterPath)!
-        let imgPath = MovieAPI.build(image: posterPath, size: MovieAPI.ImageSize.w200)
-        cell.movieImg.sd_setImage(with: <#T##URL?#>, placeholderImage: <#T##UIImage?#>, options: <#T##SDWebImageOptions#>)
+        cell.configureCell(movie: movie[indexPath.row])
+        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
-    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height{
+            guard hasMoreMovies else { return}
+            page += 1
+            getMovieList(page: page)
+        }
+    }
     
 }

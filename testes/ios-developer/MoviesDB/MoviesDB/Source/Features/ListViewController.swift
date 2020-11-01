@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SDWebImage
+
 
 class ListViewController: UIViewController {
     
@@ -81,8 +83,9 @@ extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
         let vote = movie[indexPath.row].voteCount
         cell.averageLbl.text = String(avg)
         cell.countVotesLbl.text = String(vote)
-        cell.movieImg.image = movie[indexPath.row].posterPath
-        
+        let posterPath = (movie[indexPath.row].posterPath)!
+        let imgPath = MovieAPI.build(image: posterPath, size: MovieAPI.ImageSize.w200)
+        cell.movieImg.sd_setImage(with: <#T##URL?#>, placeholderImage: <#T##UIImage?#>, options: <#T##SDWebImageOptions#>)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

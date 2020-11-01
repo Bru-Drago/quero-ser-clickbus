@@ -10,4 +10,8 @@ import UIKit
 struct K {
     static let cellIdentifier = "MovieCell"
     static let imgPlaceholder = UIImage(named:"tmdb_img")
+    
+    struct Segue {
+        static let segueIdentifier = "goToDetailVC"
+    }
 }

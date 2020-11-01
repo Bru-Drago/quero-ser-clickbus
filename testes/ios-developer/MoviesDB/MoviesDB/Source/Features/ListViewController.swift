@@ -16,6 +16,7 @@ class ListViewController: UIViewController {
     var movie : [Movie] = []
     var page = 1
     var hasMoreMovies = true
+    var movieSelected : Movie?
     
     
     override func viewDidLoad() {
@@ -25,17 +26,18 @@ class ListViewController: UIViewController {
         tableView.dataSource = self
         
         getMovieList(page: page)
+        getMoviesDetails()
 
     }
     // EXEMPLO DE COMO OBTER A LISTA DE FILMES POPULARES
     func getMovieList(page:Int){
         MovieListWorker().fetchMovieList(
             section: .popular, page: page,
-            sucess: { response in
+            sucess: { [self] response in
                 guard let movies = response?.results else { return }
-                //self.movie = movies
                 self.movie.append(contentsOf: movies)
                 if self.movie.count < 20 {self.hasMoreMovies = false}
+                //print(self.movie)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -45,11 +47,13 @@ class ListViewController: UIViewController {
             })
     }
     // EXEMPLO DE COMO OBTER OS DETALHES DE UM FILME
-    func detalheFilmes(){
+    func getMoviesDetails(){
+         
         MovieDetailsWorker().fetchMovieDetails(
-            of: 497582, // COLOQUE O ID DO FILME AQUI
+            of: 531219, // COLOQUE O ID DO FILME AQUI 497582
             sucess: { details in
                 guard let details = details else { return }
+                print("++++++++++++++++++++++++++++++++")
                 print(details)
             },
             failure: { error in
@@ -96,6 +100,14 @@ extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
             page += 1
             getMovieList(page: page)
         }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        movieSelected = movie[indexPath.row]
+        performSegue(withIdentifier: K.Segue.segueIdentifier, sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? DetailViewController else { return}
+        destination.movie = movieSelected
     }
     
 }

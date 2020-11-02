@@ -27,9 +27,10 @@ class ListViewController: UIViewController {
         
         getMovieList(page: page)
         
+        
 
     }
-    // EXEMPLO DE COMO OBTER A LISTA DE FILMES POPULARES
+    
     func getMovieList(page:Int){
         MovieListWorker().fetchMovieList(
             section: .popular, page: page,
@@ -41,18 +42,6 @@ class ListViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-            },
-            failure: { error in
-                print(error!)
-            })
-    }
-
-    // EXEMPLO DE COMO OBTER A LISTA GÊNEROS
-    func listaGeneros(){
-        GenreListWorker().fetchGenreList(
-            sucess: { response in
-                guard let genres = response?.genres else { return }
-                print(genres)
             },
             failure: { error in
                 print(error!)

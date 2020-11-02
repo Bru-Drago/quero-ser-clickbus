@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6OU-Or-xjE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -134,7 +134,16 @@
                             <constraint firstItem="6OU-Or-xjE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vCq-ZA-zoi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title=" MoviesDB" id="2Fr-w0-Oyd"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title=" MoviesDB" id="2Fr-w0-Oyd">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="magnifyingglass" catalog="system" id="GWZ-LL-8eH">
+                            <color key="tintColor" systemColor="systemGreenColor"/>
+                            <connections>
+                                <segue destination="Lah-ga-CJy" kind="show" id="SpE-1a-FaR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="6OU-Or-xjE" id="Whr-IP-1M3"/>
                         <segue destination="eJO-7j-zcg" kind="show" identifier="goToDetailVC" id="1JO-Zo-x96"/>
@@ -143,6 +152,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="87.723214285714278"/>
+        </scene>
+        <!--Genre Picker View Controller-->
+        <scene sceneID="VOa-iG-XJ7">
+            <objects>
+                <viewController id="Lah-ga-CJy" customClass="GenrePickerViewController" customModule="MoviesDB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aF5-om-6is">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ahs-Mc-Qxl">
+                                <rect key="frame" x="10" y="138" width="394" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the genre :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hr2-U0-Cpn">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="WOZ-lI-AGh"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H9Q-K0-BLN">
+                                <rect key="frame" x="20" y="698" width="374" height="50"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="pNk-Dh-tmi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="Select">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="genreSelected:" destination="Lah-ga-CJy" eventType="touchUpInside" id="KMA-TD-2wR"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pet-g9-eTJ">
+                                <rect key="frame" x="0.0" y="299" width="414" height="299"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="299" id="Xtl-xb-UNi"/>
+                                </constraints>
+                            </pickerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2xr-pC-jSW"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2xr-pC-jSW" firstAttribute="trailing" secondItem="H9Q-K0-BLN" secondAttribute="trailing" constant="20" id="6KA-p1-tkI"/>
+                            <constraint firstItem="H9Q-K0-BLN" firstAttribute="top" secondItem="pet-g9-eTJ" secondAttribute="bottom" constant="100" id="GQ7-Ol-ayz"/>
+                            <constraint firstItem="pet-g9-eTJ" firstAttribute="leading" secondItem="2xr-pC-jSW" secondAttribute="leading" id="I1x-mf-ljA"/>
+                            <constraint firstItem="H9Q-K0-BLN" firstAttribute="leading" secondItem="2xr-pC-jSW" secondAttribute="leading" constant="20" id="M4P-rm-aGs"/>
+                            <constraint firstItem="pet-g9-eTJ" firstAttribute="trailing" secondItem="2xr-pC-jSW" secondAttribute="trailing" id="aPo-eT-sUx"/>
+                            <constraint firstItem="2xr-pC-jSW" firstAttribute="bottom" secondItem="H9Q-K0-BLN" secondAttribute="bottom" constant="65" id="gXY-sk-wlf"/>
+                            <constraint firstItem="Ahs-Mc-Qxl" firstAttribute="top" secondItem="2xr-pC-jSW" secondAttribute="top" constant="50" id="lgy-KP-E0P"/>
+                            <constraint firstItem="Ahs-Mc-Qxl" firstAttribute="leading" secondItem="2xr-pC-jSW" secondAttribute="leading" constant="10" id="lqd-mT-xPg"/>
+                            <constraint firstItem="2xr-pC-jSW" firstAttribute="trailing" secondItem="Ahs-Mc-Qxl" secondAttribute="trailing" constant="10" id="vb7-Dy-feQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="dde-aE-nnZ"/>
+                    <connections>
+                        <outlet property="genrePickerView" destination="pet-g9-eTJ" id="dJX-Ef-Ef1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lAv-87-Wh5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1050.7246376811595" y="802.90178571428567"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="Nng-J0-o1w">
@@ -589,6 +666,7 @@
         <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="dollarsign.circle" catalog="system" width="128" height="121"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="ticket.fill" catalog="system" width="128" height="84"/>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

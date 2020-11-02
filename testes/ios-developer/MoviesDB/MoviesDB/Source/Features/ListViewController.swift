@@ -26,7 +26,7 @@ class ListViewController: UIViewController {
         tableView.dataSource = self
         
         getMovieList(page: page)
-        getMoviesDetails()
+        
 
     }
     // EXEMPLO DE COMO OBTER A LISTA DE FILMES POPULARES
@@ -46,20 +46,7 @@ class ListViewController: UIViewController {
                 print(error!)
             })
     }
-    // EXEMPLO DE COMO OBTER OS DETALHES DE UM FILME
-    func getMoviesDetails(){
-         
-        MovieDetailsWorker().fetchMovieDetails(
-            of: 531219, // COLOQUE O ID DO FILME AQUI 497582
-            sucess: { details in
-                guard let details = details else { return }
-                print("++++++++++++++++++++++++++++++++")
-                print(details)
-            },
-            failure: { error in
-                print(error!)
-            })
-    }
+
     // EXEMPLO DE COMO OBTER A LISTA GÊNEROS
     func listaGeneros(){
         GenreListWorker().fetchGenreList(
@@ -106,6 +93,11 @@ extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
         performSegue(withIdentifier: K.Segue.segueIdentifier, sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = " "
+        navigationItem.backBarButtonItem = backItem
+        
         guard let destination = segue.destination as? DetailViewController else { return}
         destination.movie = movieSelected
     }

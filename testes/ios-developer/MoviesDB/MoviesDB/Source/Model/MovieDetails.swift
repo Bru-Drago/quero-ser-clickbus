@@ -5,7 +5,8 @@
 //  Created by Ruan Reis on 09/10/20.
 //
 
-import Foundation
+import UIKit
+
 
 struct MovieDetails: Decodable {
     
@@ -18,4 +19,8 @@ struct MovieDetails: Decodable {
     let genres: [Genre]
     
     let credits: Credits
+    
+    
+    
 }
+

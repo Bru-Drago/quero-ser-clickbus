@@ -16,6 +16,7 @@ protocol MovieDetailsWorkerProtocol {
     func fetchMovieDetails(of movieId: Int,
                            sucess: @escaping MovieDetailsSuccess,
                            failure: @escaping MovieDetailsError)
+  
 }
 
 class MovieDetailsWorker: MovieDetailsWorkerProtocol {

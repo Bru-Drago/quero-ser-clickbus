@@ -15,9 +15,30 @@ protocol MovieListWorkerProtocol {
     func fetchMovieList(section: Section, page: Int,
                         sucess: @escaping MovieListSuccess,
                         failure: @escaping MovieListError)
+    
+    //
+    func fetchMovieListFiltered(genreID: Int, page: Int,
+                        sucess: @escaping MovieListSuccess,
+                        failure: @escaping MovieListError)
 }
 
 class MovieListWorker: MovieListWorkerProtocol {
+    
+    func fetchMovieListFiltered(genreID: Int, page: Int, sucess: @escaping MovieListSuccess, failure: @escaping MovieListError) {
+        let enconding = JSONEncoding.default
+        let url = MovieAPI.build(page: page, id: genreID)
+        
+        Network().request(
+            data: RequestData(url: url, method: .get, encoding: enconding),
+            decoder: SnakeCaseDecoder(expectation: MovieListResponse.self),
+            success: { response in
+                sucess(response)
+            },
+            failure: {error in
+                failure(error)
+            })
+    }
+    
     
     func fetchMovieList(section: Section, page: Int,
                         sucess: @escaping MovieListSuccess,

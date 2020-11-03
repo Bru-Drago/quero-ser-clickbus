@@ -17,6 +17,7 @@ class ListViewController: UIViewController {
     var page = 1
     var hasMoreMovies = true
     var movieSelected : Movie?
+    var genreSelected : Genre?
     
     
     override func viewDidLoad() {
@@ -27,7 +28,7 @@ class ListViewController: UIViewController {
         
         getMovieList(page: page)
         
-        
+       
 
     }
     
@@ -38,7 +39,7 @@ class ListViewController: UIViewController {
                 guard let movies = response?.results else { return }
                 self.movie.append(contentsOf: movies)
                 if self.movie.count < 20 {self.hasMoreMovies = false}
-                //print(self.movie)
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -79,7 +80,7 @@ extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         movieSelected = movie[indexPath.row]
-        performSegue(withIdentifier: K.Segue.segueIdentifier, sender: self)
+        performSegue(withIdentifier: K.Segue.segueDetail, sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -89,6 +90,15 @@ extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
         
         guard let destination = segue.destination as? DetailViewController else { return}
         destination.movie = movieSelected
+        
+//        if segue.identifier == K.Segue.segueDetail {
+//            let detailVC = (segue.destination as? DetailViewController)
+//            detailVC?.movie = movieSelected
+//        }
+//        else if segue.identifier == K.Segue.segueFilterPicker{
+//            let genrePickerVC = (segue.destination as? GenrePickerViewController)
+//            genrePickerVC?.movieList = movie
+//        }
     }
     
 }

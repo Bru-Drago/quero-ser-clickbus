@@ -12,6 +12,10 @@ struct K {
     static let imgPlaceholder = UIImage(named:"tmdb_img")
     
     struct Segue {
-        static let segueIdentifier = "goToDetailVC"
+        static let segueDetail = "goToDetailVC"
+        static let segueFilterPicker = "goToFilterGenreVC"
+        static let segueListFiltered = "goToListFilteredVC"
+        static let segueFilterToDetail = "filterToDetailVC"
+        
     }
 }

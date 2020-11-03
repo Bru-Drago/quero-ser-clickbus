@@ -18,6 +18,7 @@ class ListViewController: UIViewController {
     var hasMoreMovies = true
     var movieSelected : Movie?
     var genreSelected : Genre?
+    let alertManager = AlertManager()
     
     
     override func viewDidLoad() {
@@ -46,11 +47,13 @@ class ListViewController: UIViewController {
             },
             failure: { error in
                 print(error!)
+                self.presentAlertOnMainThread(title: "Sorry!", body: "Please verify your connection.", buttonTitle: "OK")
             })
     }
 }
 
 extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movie.count
         
@@ -90,15 +93,7 @@ extension ListViewController : UITableViewDataSource ,UITableViewDelegate {
         
         guard let destination = segue.destination as? DetailViewController else { return}
         destination.movie = movieSelected
-        
-//        if segue.identifier == K.Segue.segueDetail {
-//            let detailVC = (segue.destination as? DetailViewController)
-//            detailVC?.movie = movieSelected
-//        }
-//        else if segue.identifier == K.Segue.segueFilterPicker{
-//            let genrePickerVC = (segue.destination as? GenrePickerViewController)
-//            genrePickerVC?.movieList = movie
-//        }
+
     }
     
 }

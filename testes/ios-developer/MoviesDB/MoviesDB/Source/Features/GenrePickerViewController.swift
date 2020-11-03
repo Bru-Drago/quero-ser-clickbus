@@ -16,6 +16,7 @@ class GenrePickerViewController: UIViewController {
     var genres1 = [Genre]()
     var selectedGenre = ""
     var genreInt = 1
+    let alertManager = AlertManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,6 @@ class GenrePickerViewController: UIViewController {
         
     }
     
-    // EXEMPLO DE COMO OBTER A LISTA GÊNEROS
     func getGenres(){
         GenreListWorker().fetchGenreList(
             sucess: { response in
@@ -38,6 +38,7 @@ class GenrePickerViewController: UIViewController {
             },
             failure: { error in
                 print(error!)
+                self.presentAlertOnMainThread(title: "Atention!", body: "Verify your connection!", buttonTitle: "OK")
             })
        
     }

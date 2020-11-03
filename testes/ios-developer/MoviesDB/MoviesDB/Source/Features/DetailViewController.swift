@@ -23,6 +23,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var genreLbl : UILabel!
     
     var movie : Movie?
+    let alertManager = AlertManager()
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +44,11 @@ class DetailViewController: UIViewController {
                 sucess: { [self] details in
                     guard let details = details else { return }
                     
-                    var budget = (details.budget)
-                    var revenue = (details.revenue)
+                    let budget = (details.budget)
+                    let revenue = (details.revenue)
                     
                     
-                    var runtime = String(details.runtime)
+                    let runtime = String(details.runtime)
                     var completeGenre = ""
                     for genre in details.genres{
                         completeGenre += genre.name + " \n "
@@ -73,6 +74,7 @@ class DetailViewController: UIViewController {
                 },
                 failure: { error in
                     print(error!)
+                    self.presentAlertOnMainThread(title: "Atention", body: "Sorry! Try again!", buttonTitle: "OK")
                 })
         
     }
@@ -100,7 +102,7 @@ class DetailViewController: UIViewController {
         let imgBackdropPath = MovieAPI.build(image: backdropPath, size: MovieAPI.ImageSize.w500)
         print(imgBackdropPath)
         if let backdropURL = URL(string: imgBackdropPath){
-            imgBackdrop.sd_imageIndicator = SDWebImageActivityIndicator.medium
+            imgBackdrop.sd_imageIndicator = SDWebImageActivityIndicator.large
             imgBackdrop.sd_setImage(with: backdropURL, placeholderImage: K.imgPlaceholder)
         }
     }

@@ -21,6 +21,5 @@ struct MovieDetails: Decodable {
     let credits: Credits
     
     
-    
 }
 

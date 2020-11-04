@@ -39,3 +39,8 @@ A chave da API deve ser colocada na variável `key` que está no arquivo `MovieA
 ![Referência de layout](https://github.com/RocketBus/quero-ser-clickbus/blob/master/testes/ios-developer/Layout.png)
 
 Fonte: https://www.behance.net/gallery/97840987/FILMINGO-Online-Cinema-Mobile-UX-UI?tracking_source=search_projects_recommended%7Cmovie%20mobile%20app
+
+### Teste Bruna
+* Na realização do teste foi utilizado a biblioteca SDWebImage para o download de imagens
+
+![](4kz8mv.gif)
